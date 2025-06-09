@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=0.6, maximum-scale=1, minimum-scale=0.6, user-scalable=0">
+<meta name="description" content="Wear your earphone">
+<title>Cqy, I love you</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+<link rel="stylesheet" href="stylesheets/style.css" />
+
+<script src="js/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/sakura.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/modernizr.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/typed.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bgm.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- 视频弹出样式 -->
+<style>
+  #videoContainer {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 720px;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 9998;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+
+  #videoContainer.show {
+    display: block;
+    opacity: 1;
+  }
+
+  #videoContainer.hide {
+    opacity: 0;
+  }
+
+  #showVideoBtn {
+    padding: 8px 18px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #f48fb1, #f06292); /* 柔和樱花粉渐变 */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+  }
+
+  #showVideoBtn:hover {
+    transform: scale(1.05);
+  }
+
+  #closeVideoBtn {
+    margin-top: 10px;
+    padding: 6px 16px;
+    font-size: 16px;
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+
+	<!-- 播放视频按钮：信件上方 -->
+	<div style="text-align: center; margin-top: 20px;">
+		<button id="showVideoBtn">播放视频</button>
+	</div>
+
+	<!-- 视频弹窗 -->
+	<div id="videoContainer">
+		<video id="myVideo" src="videos/your-video.mp4" controls autoplay style="
+			width: 100%; 
+			max-height: 400px; 
+			border-radius: 8px;">
+		</video>
+		<br>
+		<button id="closeVideoBtn">退出视频播放</button>
+	</div>
+
+	<div id="jsi-cherry-container"></div>
+
+	<section class="container" id="contact">
+		<form class="flip">
+			<div class="front">
+				<h2>To&nbsp;&nbsp;陈沁羽</h2>
+				<a id="flip2back" href="#">Flip</a>
+			</div>
+			<div id="content" class="back">
+				<div id="letter">
+					<div class="container">
+						<div class="flip">                        
+							<div class="front"></div>
+							<div class="back">
+								<p class="letter"></p> 
+								<a id="close" href="#">Close</a>								
+							</div>                            
+						</div>
+					</div>
+				</div>
+				<div id="top">
+					<a id="flip" href="#contact">Flip</a>
+				</div>
+				<div id="lid" class="container">
+					<div class="flip">  
+						<div class="front">
+							<a id="open" href="#content"><span></span></a>
+						</div>                        
+						<div class="back"></div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	<div id="footer">
+		<audio id="music2" preload="auto" loop></audio>
+		<a id="music_btn2" href="javascript:playPause();"></a>
+	</div>
+
+</body>
+
+<script src="js/letter.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- 视频播放逻辑 -->
+<script type="text/javascript">
+  const showBtn = document.getElementById('showVideoBtn');
+  const closeBtn = document.getElementById('closeVideoBtn');
+  const videoContainer = document.getElementById('videoContainer');
+  const video = document.getElementById('myVideo');
+
+  showBtn.addEventListener('click', function () {
+    videoContainer.classList.remove('hide');
+    videoContainer.classList.add('show');
+    videoContainer.style.display = 'block';
+    video.play();
+  });
+
+  closeBtn.addEventListener('click', function () {
+    video.pause();
+    video.currentTime = 0;
+    videoContainer.classList.remove('show');
+    videoContainer.classList.add('hide');
+    setTimeout(() => {
+      videoContainer.style.display = 'none';
+    }, 500);
+  });
+</script>
+
+</html>
